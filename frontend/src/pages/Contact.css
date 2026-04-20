@@ -1,0 +1,51 @@
+.contact__header {
+  padding: 9rem 0 4rem;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--bg-deep);
+}
+.contact__title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5.5vw, 66px);
+  font-weight: 300; letter-spacing: 0.04em;
+  color: var(--text-primary); line-height: 1.1; margin-top: 12px;
+}
+.contact__body { padding: 4rem 0 5rem; }
+.contact__grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; }
+.contact__info { display: flex; flex-direction: column; gap: 36px; }
+.contact__info-label { margin-bottom: 10px; }
+.contact__wa-btn {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #25d366; color: #fff;
+  padding: 12px 22px;
+  font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-family: var(--font-body); font-weight: 400;
+  transition: background 0.2s; margin-bottom: 8px;
+}
+.contact__wa-btn:hover { background: #1fba59; }
+.contact__wa-icon { display: flex; align-items: center; }
+.contact__info-val { font-size: 14px; color: var(--text-primary); line-height: 1.7; font-weight: 300; }
+.contact__info-sub { font-size: 12px; color: var(--text-muted); margin-top: 4px; letter-spacing: 0.06em; }
+.contact__form-note {
+  font-size: 13px; color: var(--text-muted); line-height: 1.75;
+  margin-bottom: 28px; font-weight: 300;
+  border-left: 2px solid var(--rose-dim); padding-left: 16px;
+}
+.contact__field { margin-bottom: 20px; }
+.contact__label {
+  display: block; font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px;
+}
+.contact__input {
+  width: 100%; background: var(--white);
+  border: 0.5px solid var(--border-mid);
+  color: var(--text-primary);
+  padding: 13px 16px; font-size: 14px;
+  font-family: var(--font-body); font-weight: 300;
+  outline: none; transition: border-color 0.2s; resize: none;
+}
+.contact__input::placeholder { color: var(--text-faint); }
+.contact__input:focus { border-color: var(--rose-dim); }
+.contact__textarea { line-height: 1.7; }
+.contact__submit { width: 100%; padding: 15px; font-size: 12px; }
+.contact__sent { margin-top: 12px; font-size: 12px; color: var(--rose); letter-spacing: 0.1em; text-align: center; }
+@media (max-width: 860px) { .contact__grid { grid-template-columns: 1fr; gap: 3rem; } }

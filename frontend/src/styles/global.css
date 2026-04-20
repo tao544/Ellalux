@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:           #faf7f4;
+  --bg-deep:      #f4efe9;
+  --bg-card:      #ffffff;
+  --bg-surface:   #f9f4f0;
+  --border:       #e8ddd5;
+  --border-mid:   #d9ccc2;
+
+  --rose:         #c4768a;
+  --rose-light:   #d9929f;
+  --rose-dark:    #9e556a;
+  --rose-pale:    #f5e6ea;
+  --rose-dim:     #e8c5cc;
+
+  --mauve:        #8a6d7a;
+  --mauve-light:  #b89aa8;
+
+  --text-primary: #2e1f27;
+  --text-body:    #5c4a54;
+  --text-muted:   #9a8490;
+  --text-faint:   #c4b8bc;
+
+  --cream:        #fdf9f6;
+  --white:        #ffffff;
+
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Jost', sans-serif;
+  --ease:         cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-body);
+  font-size: 15px;
+  line-height: 1.6;
+  font-weight: 300;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; font-family: var(--font-body); }
+img { display: block; max-width: 100%; }
+
+.container { max-width: 1240px; margin: 0 auto; padding: 0 2rem; }
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--rose);
+  font-family: var(--font-body);
+  font-weight: 400;
+}
+
+.btn-gold {
+  background: var(--rose);
+  color: var(--white);
+  border: none;
+  padding: 14px 44px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: var(--font-body);
+  transition: background 0.2s var(--ease), transform 0.15s;
+  display: inline-block;
+}
+.btn-gold:hover { background: var(--rose-light); transform: translateY(-1px); }
+.btn-gold:active { transform: scale(0.98); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--rose);
+  border: 1px solid var(--rose);
+  padding: 13px 40px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-family: var(--font-body);
+  transition: background 0.2s var(--ease), color 0.2s;
+}
+.btn-outline:hover { background: var(--rose); color: var(--white); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: none;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 400;
+  padding: 0;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--text-primary); }
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.section-header { margin-bottom: 3rem; }
+.section-header .eyebrow { margin-bottom: 10px; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.fade-up { animation: fadeUp 0.7s var(--ease) both; }
+.fade-in { animation: fadeIn 0.6s var(--ease) both; }
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.35s; }
+.delay-4 { animation-delay: 0.5s; }
+.delay-5 { animation-delay: 0.65s; }
+
+@media (max-width: 768px) { .container { padding: 0 1.25rem; } }

@@ -1,0 +1,33 @@
+.shop__header {
+  padding: 9rem 0 4rem;
+  border-bottom: 0.5px solid var(--border);
+  background: var(--bg-deep);
+}
+.shop__title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 72px);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-top: 12px;
+}
+.shop__body { padding: 3rem 0 5rem; }
+.shop__filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 3rem; }
+.shop__filter-btn {
+  background: transparent;
+  border: 0.5px solid var(--border-mid);
+  color: var(--text-muted);
+  padding: 9px 20px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.shop__filter-btn:hover { color: var(--rose); border-color: var(--rose-dim); }
+.shop__filter-btn--active { background: var(--rose); color: var(--white); border-color: var(--rose); }
+.shop__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; }
+.shop__empty { padding: 5rem 0; color: var(--text-faint); font-size: 14px; letter-spacing: 0.1em; }
