@@ -21,9 +21,10 @@ class ProductMediaInline(admin.TabularInline):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductMediaInline]
-    list_display   = [
+    list_display = [
         "product_image_thumb", "name", "category",
-        "price_display", "in_stock", "featured", "updated_at"
+        "price",          # ← show raw price field directly
+        "in_stock", "featured", "updated_at"
     ]
     list_display_links = ["product_image_thumb", "name"]
     list_filter    = ["category", "in_stock", "featured"]
@@ -53,14 +54,6 @@ class ProductAdmin(admin.ModelAdmin):
         }),
     )
 
-    def price_display(self, obj):
-        try:
-            return format_html("₦{:,.0f}", float(obj.price))
-        except (TypeError, ValueError):
-            return "₦0"
-    price_display.short_description = "Price"
-    price_display.admin_order_field = "price"
-
     def product_image_thumb(self, obj):
         if obj.image:
             return format_html(
@@ -78,7 +71,6 @@ class ProductAdmin(admin.ModelAdmin):
             )
         return "No image uploaded yet."
     product_image_preview.short_description = "Image Preview"
-
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
