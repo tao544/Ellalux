@@ -153,3 +153,7 @@ cloudinary.config(
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+# Debug - remove after confirming cloudinary works
+import sys
+print(f"CLOUDINARY CONFIG: cloud={os.getenv('CLOUDINARY_CLOUD_NAME')}, key={os.getenv('CLOUDINARY_API_KEY')}", file=sys.stderr)
+print(f"FILE STORAGE: {DEFAULT_FILE_STORAGE}", file=sys.stderr)
