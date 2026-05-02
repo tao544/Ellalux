@@ -79,8 +79,10 @@ USE_I18N = True
 USE_TZ = True
 
 # ── Static Files ──────────────────────────────────
+# ── Static Files ──────────────────────────────────
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'  # ← ADD THIS BACK
 WHITENOISE_AUTOREFRESH = True
 WHITENOISE_USE_FINDERS = True
 
