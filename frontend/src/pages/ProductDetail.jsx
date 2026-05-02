@@ -13,27 +13,26 @@ export default function ProductDetail({ product: initialProduct, navigate }) {
 
   // 🔥 FETCH FULL PRODUCT DETAILS
   useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(`/api/products/${initialProduct.id}/`);
-        const data = await res.json();
+  const fetchProduct = async () => {
+    try {
+      const API_BASE = import.meta.env.VITE_API_BASE || "/api";
+      const res = await fetch(`${API_BASE}/products/${initialProduct.id}/`);
 
-        setProduct(data);
+      if (!res.ok) throw new Error(`HTTP error: ${res.status}`);
 
-        // ✅ SET DEFAULT IMAGE
-        if (data.image_url) {
-          setActiveMedia({
-            type: "image",
-            url: data.image_url,
-          });
-        }
-      } catch (err) {
-        console.error("Failed to fetch product details", err);
+      const data = await res.json();
+      setProduct(data);
+
+      if (data.image_url) {
+        setActiveMedia({ type: "image", url: data.image_url });
       }
-    };
+    } catch (err) {
+      console.error("Failed to fetch product details", err);
+    }
+  };
 
-    fetchProduct();
-  }, [initialProduct.id]);
+  fetchProduct();
+}, [initialProduct.id]);
 
   const related = getRelated(product);
 
