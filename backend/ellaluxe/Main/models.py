@@ -28,7 +28,16 @@ class Product(models.Model):
         max_length=200,
         help_text="Comma-separated sizes e.g. XS,S,M,L,XL or 36,37,38,39"
     )
-    image       = CloudinaryField('image', blank=True, null=True)  # ← CHANGED
+    image = CloudinaryField(
+        'image',
+        blank=True,
+        null=True,
+        transformation=[
+            {'width': 800, 'crop': 'limit'},
+            {'quality': 'auto:good'},
+            {'fetch_format': 'auto'},
+        ]
+    )
     in_stock    = models.BooleanField(default=True)
     featured    = models.BooleanField(default=False, help_text="Show on homepage featured section")
     created_at  = models.DateTimeField(auto_now_add=True)
@@ -67,8 +76,17 @@ class ProductMedia(models.Model):
         ("image", "Image"),
         ("video", "Video"),
     )
-    product    = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
-    file       = CloudinaryField('file', blank=True, null=True, resource_type='auto')  # ← CHANGED (auto handles both image and video)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
+    file = CloudinaryField(
+        'file',
+        blank=True,
+        null=True,
+        resource_type='auto',
+        transformation=[
+            {'quality': 'auto:good'},
+            {'fetch_format': 'auto'},
+        ]
+    )
     media_type = models.CharField(max_length=10, choices=MEDIA_TYPE, default="image")
 
     def __str__(self):

@@ -94,4 +94,12 @@ cloudinary.config(
     secure=True
 )
 
+# Cloudinary upload limits
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME', ''),
+    'API_KEY':    os.getenv('CLOUDINARY_API_KEY', ''),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET', ''),
+    'MAX_IMAGE_SIZE': 10000000,  # 10MB max
+}
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
