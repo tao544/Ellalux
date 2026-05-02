@@ -7,4 +7,6 @@ pip install -r requirements.txt
 
 python manage.py makemigrations --noinput
 python manage.py migrate
+
+# Force collect all static files including Django admin
 python manage.py collectstatic --noinput --clear
