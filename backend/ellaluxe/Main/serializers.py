@@ -14,7 +14,6 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class ProductListSerializer(serializers.ModelSerializer):
-    """Lightweight serializer for product cards in grid views."""
     category_name = serializers.CharField(source="category.name", read_only=True)
     image_url     = serializers.SerializerMethodField()
     sizes         = serializers.SerializerMethodField()
@@ -28,9 +27,9 @@ class ProductListSerializer(serializers.ModelSerializer):
         ]
 
     def get_image_url(self, obj):
-        request = self.context.get("request")
-        if obj.image and request:
-            return request.build_absolute_uri(obj.image.url)
+        if obj.image:
+            # CloudinaryField returns full https://res.cloudinary.com/... URL
+            return obj.image.url
         return None
 
     def get_sizes(self, obj):
@@ -41,17 +40,16 @@ class ProductMediaSerializer(serializers.ModelSerializer):
     file_url = serializers.SerializerMethodField()
 
     class Meta:
-        model = ProductMedia
+        model  = ProductMedia
         fields = ["id", "media_type", "file_url"]
 
     def get_file_url(self, obj):
-        request = self.context.get("request")
-        if obj.file and request:
-            return request.build_absolute_uri(obj.file.url)
+        if obj.file:
+            return obj.file.url
         return None
 
+
 class ProductDetailSerializer(serializers.ModelSerializer):
-    """Full serializer for the product detail page."""
     category_name = serializers.CharField(source="category.name", read_only=True)
     image_url     = serializers.SerializerMethodField()
     sizes         = serializers.SerializerMethodField()
@@ -70,9 +68,8 @@ class ProductDetailSerializer(serializers.ModelSerializer):
         ]
 
     def get_image_url(self, obj):
-        request = self.context.get("request")
-        if obj.image and request:
-            return request.build_absolute_uri(obj.image.url)
+        if obj.image:
+            return obj.image.url
         return None
 
     def get_sizes(self, obj):
@@ -84,8 +81,6 @@ class ProductDetailSerializer(serializers.ModelSerializer):
 
 class ContactMessageSerializer(serializers.ModelSerializer):
     class Meta:
-        model  = ContactMessage
-        fields = ["id", "name", "email", "subject", "message", "created_at"]
+        model        = ContactMessage
+        fields       = ["id", "name", "email", "subject", "message", "created_at"]
         read_only_fields = ["id", "created_at"]
-
-

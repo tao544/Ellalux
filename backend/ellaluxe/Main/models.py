@@ -1,4 +1,5 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 
 class Category(models.Model):
@@ -15,9 +16,6 @@ class Category(models.Model):
 
 
 class Product(models.Model):
-    SIZE_CHOICES_CLOTHING = ["XS", "S", "M", "L", "XL", "XXL"]
-    SIZE_CHOICES_SHOES    = ["36", "37", "38", "39", "40", "41", "42"]
-
     name        = models.CharField(max_length=200)
     category    = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name="products")
     price       = models.DecimalField(max_digits=10, decimal_places=2)
@@ -30,7 +28,7 @@ class Product(models.Model):
         max_length=200,
         help_text="Comma-separated sizes e.g. XS,S,M,L,XL or 36,37,38,39"
     )
-    image       = models.ImageField(upload_to="products/", blank=True, null=True)
+    image       = CloudinaryField('image', blank=True, null=True)  # ← CHANGED
     in_stock    = models.BooleanField(default=True)
     featured    = models.BooleanField(default=False, help_text="Show on homepage featured section")
     created_at  = models.DateTimeField(auto_now_add=True)
@@ -62,21 +60,16 @@ class ContactMessage(models.Model):
 
     def __str__(self):
         return f"{self.name} — {self.subject or 'No subject'} ({self.created_at:%d %b %Y})"
-    
+
 
 class ProductMedia(models.Model):
     MEDIA_TYPE = (
         ("image", "Image"),
         ("video", "Video"),
     )
-
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
-    file = models.FileField(upload_to="products/media/")
+    product    = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="media")
+    file       = CloudinaryField('file', blank=True, null=True, resource_type='auto')  # ← CHANGED (auto handles both image and video)
     media_type = models.CharField(max_length=10, choices=MEDIA_TYPE, default="image")
 
     def __str__(self):
-        return f"{self.product.name} - {self.media_type}" 
-
-
-
-    
+        return f"{self.product.name} - {self.media_type}"
